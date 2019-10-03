@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+
+
+<meta charset="UTF-8" />
+<title> TypeHead
+</title>
+<link rel="stylesheet" href="style.css" /> 
+
+</head>
+
+<body>
+
+<div>
+
+<form class="typehead">
+    <input type="text" placeholder="Enter City name"  oninput="search(this.value)"/>
+
+
+
+</form>
+
+<ul class="suggestions"> </ul>
+
+</div>
+
+<script>
+
+var endpoint = "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
+
+var cities = [];
+fetch(endpoint).then(blob => blob.json()).then(data => data.map(place => {
+   cities.push(place.city);
+}));
+
+
+function search(val){
+
+var suggestions = document.querySelector('.suggestions');
+var _cities = cities.filter( city =>{
+    var regex = new RegExp(val, 'gi');
+    return city.match(regex);
+}).map(city => {
+
+
+    var sIndex= city.toLowerCase().indexOf(val);
+          var lIndex = sIndex + val.length;
+          var html = `
+                <li>${city.substring(0, sIndex)}<span class="highlight">${city.substring(sIndex, lIndex)}</span>${city.substring(lIndex)}</li>
+                `;
+          return html;
+        
+    // var html = `<li> ${city}</li>`;
+    // return html;
+}).join(' ');
+
+suggestions.innerHTML = _cities;
+
+}
+
+
+
+</script>
+
+</body>
+
+
+
+</html>
