@@ -1,4 +1,4 @@
-# JavaScript-Session
+# JavaScript-Session [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)]
 Folder JS-session contains 3 apps, which are
 # 1.Taxcalculator
 It calculate taxes that are applicable in any Restraurant.
